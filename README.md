@@ -6,7 +6,7 @@ npm install
 ```
 
 ### Compiles and hot-reloads for development
-```git remote add origin https://github.com/username/git-tutorial.git
+```git remote add origin https://github.com/username/git-tutorial.gitgi
 npm run serve
 ```
 
