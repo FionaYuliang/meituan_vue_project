@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="content">
-
+            首页
         </div>
         <Footer></Footer>
     </div>
@@ -14,4 +14,5 @@ export default {
     } 
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+</style>

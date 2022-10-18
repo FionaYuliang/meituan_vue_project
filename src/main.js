@@ -5,6 +5,8 @@ import {Button} from 'vant';
 import { Icon } from 'vant';
 import 'vant/lib/index.css';
 import router from '../src/router/index';
+import '../src/common/css/base.less';
+
 
 const app = createApp(App);
 app.use(Button).use(Icon).use(router);
