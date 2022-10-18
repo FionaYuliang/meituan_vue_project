@@ -4,6 +4,10 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
+            path: '/',
+            redirect: '/home',
+        },
+        {
             path: '/home',
             component: () => import('../pages/myHome/MyHome'),
         },
@@ -16,8 +20,8 @@ const router = createRouter({
             component: () => import('../pages/myOrder/MyOrder'),
         },
         {
-            path: 'mine',
-            component: () => import('../pages/mine/Mine'),
+            path: '/center',
+            component: () => import('../pages/myCenter/MyCenter'),
         }
     ]
 })

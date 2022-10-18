@@ -1,5 +1,17 @@
-<template>首页</template>
+<template>
+    <div class="home">
+        <div class="content">
+
+        </div>
+        <Footer></Footer>
+    </div>
+</template>
 <script>
-export default {}
+import Footer from '../../components/Footer.vue'
+export default { 
+    components: { 
+        Footer,
+    } 
+}
 </script>
 <style lang="less" scoped></style>
