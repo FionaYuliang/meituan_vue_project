@@ -22,6 +22,10 @@ const router = createRouter({
         {
             path: '/center',
             component: () => import('../pages/myCenter/MyCenter'),
+        },
+        {
+            path: '/shop',
+            component: () => import('../pages/myShop/MyShop'),
         }
     ]
 })
