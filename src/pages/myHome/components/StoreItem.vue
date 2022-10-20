@@ -1,5 +1,5 @@
 <template>
-    <div class="item">
+    <div class="item" @click="toShop">
         <img :src="item.pic" alt="" />
         <div class="item_right">
             <div class="title">{{ item.title }}</div>
@@ -15,8 +15,19 @@
 </template>
 
 <script>
+import router from "@/router";
+import { useRouter} from "vue-router";
 export default {
     props:["item"],
+    setup(){
+      const router = useRouter();
+      const toShop = () => {
+        router.push('./shop');
+      };
+      return {
+        toShop,
+      }
+    }
 }
 </script>
 <style lang='less' scoped>
