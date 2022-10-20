@@ -23,18 +23,26 @@
                                 <svg class="icon" aria-hidden="true">
                   <use :xlink:href="`#${i.icon}`"></use>
                 </svg>
-                {{ i.name}}
+                {{ i.name }}
                             </div>
                         </div>
                         <div class="small_classify">
-                            <svg class="icon" aria-hidden="true">
+                            <div v-for="(i, index) in small_classify" :key="index" >
+                                <svg class="icon" aria-hidden="true">
                   <use :xlink:href="`#${i.icon}`"></use>
                 </svg>
                 {{ i.name }}
+                            </div>
+                   
                         </div>
                     </div>
 
                 </div>
+                <van-tabs class="van-tabs">
+                    <van-tab v-for="(i, index) in content_nav_list" :title="i.tab" :key="index">
+                        <Store :store_list="i.data"></Store>
+                    </van-tab>
+                </van-tabs>
             </div>
         </div>
         <Footer></Footer>
@@ -43,10 +51,12 @@
 <script>
 import Footer from '../../components/Footer.vue';
 import {reactive, toRefs } from 'vue';
+import Store from './components/Store.vue';
 export default { 
-    components: { 
-        Footer,
-    } ,
+    components: {
+    Footer,
+    Store,
+} ,
     setup(){
         let data = reactive({
         big_classify: [
@@ -59,7 +69,7 @@ export default {
       small_classify: [
         { name: "午餐", icon: "icon-iconfonttubiaozhizuo-1" },
         { name: "买酒", icon: "icon-iconfonttubiaozhizuo-" },
-        { name: "新鲜水果", icon: "icon-iconfonttubiaozhizuo-9" },
+        { name: "新鲜水果", icon: "icon-iconfonttubiaozhizuo-" },
         { name: "汉堡披萨", icon: "icon-iconfonttubiaozhizuo-6" },
         { name: "休闲饮品", icon: "icon-iconfonttubiaozhizuo-8" },
         { name: "夜宵", icon: "icon-iconfonttubiaozhizuo-3" },

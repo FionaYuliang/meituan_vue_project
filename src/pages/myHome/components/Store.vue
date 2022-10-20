@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.store_lsit_item {
+.store_list_item {
     margin-top: 10px;
 }
 </style>
