@@ -19,9 +19,9 @@
         </div>
         <van-action-bar>
           <van-action-bar-icon icon="chat-o" text="客服" @click="service"/>
-          <van-action-bar-icon icon="cart-o" text="购物车" badge="0" @click=""/>
-          <van-action-bar-button type="warning" text="加入购物车" @click=""/>
-          <van-action-bar-button type="danger" text="立即购买" @click=""/>
+          <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" @click=""/>
+          <van-action-bar-button type="warning" text="加入购物车" @click="toCart"/>
+          <van-action-bar-button type="danger" text="立即购买" @click="buyAction"/>
         </van-action-bar>
     </div>
 </template>
@@ -32,13 +32,18 @@ import { Toast } from 'vant';
 import { reactive,toRefs } from 'vue';
 import Header from '../../components/Header.vue';
 import FoodList from './components/FoodList.vue';
+import { useStore } from "vuex";
+import router, { useRouter } from 'vue-router';
+import { returnStatement } from '@babel/types';
 export default {
     components :{
     Header,
     FoodList,
 },
     setup(){
-        let data = reactive({
+      const store = useStore();
+      const router = useRouter();
+      let data = reactive({
       title: "鱼拿酸菜鱼",
       img: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
       storeData: [
@@ -118,12 +123,46 @@ export default {
       ],
       });
 
+      //click client
       const service = () =>{
-        Toast.fail("waiting");
+        Toast.fail("敬请期待~");
       };
+
+      //跳转购物车
+      const toCart = () => {
+        router.push('/cart');
+      }
+      //加入购物车
+      const handleAddCart = (type) => {
+        let carlist = [];
+        data.storeData.forEach((item)=>{
+          item.data.items?.forEach((sub_item)=>{
+            sub_item.children.forEach((subsub_item)=>{
+              if(subsub_item.num > 0){
+                carlist.push(subsub_item);
+              }
+            })
+          })
+        })
+        if(carlist.length === 0){
+          Toast("请选择商品");
+          return;
+        }
+        store.commit('ADDCART',carlist);
+        type === 'buy' ? toCart() : "";
+      };
+      //点击立即购买
+      const buyAction = () => {
+        handleAddCart("buy");
+      }
+
       return {
           ...toRefs(data),
           service,
+          handleAddCart,
+          store,
+          buyAction,
+          toCart
       };
     }
 }

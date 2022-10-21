@@ -5,6 +5,7 @@ import {Button, Icon, Tab, Tabs, TreeSelect, Stepper, ActionBar, ActionBarIcon, 
 import 'vant/lib/index.css';
 import router from '../src/router/index';
 import '../src/common/css/base.less';
+import store from '../src/store/index';
 
 
 const app = createApp(App);
@@ -19,4 +20,5 @@ use(ActionBarIcon).
 use(ActionBarButton);
 
 app.use(router);
+app.use(store);
 app.mount('#app');
