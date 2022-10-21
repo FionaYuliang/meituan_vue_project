@@ -1,24 +1,23 @@
 <template>
     <div class="store_details">
-        <Header></Header>
+        <Header title="店铺"></Header>
         <div class="content">
             <div class="img"></div>
             <div class="food_classify">
                 <div class="name">
-                    food 
-                    <img class="store_img" />
+                    {{ title }}
+                    <img :src="img" class="store_img" />
                 </div>
-            </div>
             <div class="classify">
                 <van-tabs color="#ffc400">
                     <van-tab v-for="(i, index) in storeData" :title="i.name">
-                        <FoodList></FoodList>
+                        <FoodList :index="index" :foodData="i.data"></FoodList>
                     </van-tab>
                 </van-tabs>
-
             </div>
-
+          
         </div>
+    </div>
     </div>
 </template>
 
@@ -134,7 +133,7 @@ export default {
       height: 150px;
     }
     .food_classify {
-      height: 500px;
+      // height: 500px;
       background-color: #fff;
       margin-top: -30px;
       border-radius: 20px 20px 0 0;
