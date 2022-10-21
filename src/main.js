@@ -1,7 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import 'amfe-flexible';
-import {Button, Icon, Tab, Tabs, TreeSelect, Stepper, ActionBar, ActionBarIcon, ActionBarButton} from 'vant'
+import {Button, Icon, Tab, Tabs, TreeSelect, 
+    Stepper, ActionBar, ActionBarIcon, ActionBarButton,
+    Checkbox, CheckboxGroup} from 'vant'
 import 'vant/lib/index.css';
 import router from '../src/router/index';
 import '../src/common/css/base.less';
@@ -17,7 +19,9 @@ use(TreeSelect).
 use(Stepper).
 use(ActionBar).
 use(ActionBarIcon).
-use(ActionBarButton);
+use(ActionBarButton).
+use(Checkbox).
+use(CheckboxGroup);
 
 app.use(router);
 app.use(store);

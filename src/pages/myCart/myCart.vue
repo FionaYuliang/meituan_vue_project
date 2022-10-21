@@ -25,7 +25,7 @@ export default {
         let isShow = ref(true);
 
         const init = () =>{
-            if(store.state.carList.length === 0){
+            if(store.state.cartList.length === 0){
                 isShow.value = false;
             }
         };

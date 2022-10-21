@@ -1,11 +1,15 @@
 <template>
 <div class="content_item">
     <div class="left">
+      <van-checkbox :name="item.id" v-if="showCheckBox"></van-checkbox>
         <img :src="item.pic"/>
         <div class="text">
             <div class="title">{{ item.title }}</div>
-            <van-icon name=add-o v-if="item.add && showAdd" @click="addClick(item.id)"></van-icon>
-            <van-stepper v-model="item.num" :step="1" :min="1" :name="item.id" @change="onChange"/>
+            <van-icon name=add-o 
+            v-if="item.add && showAdd" 
+            @click="addClick(item.id)"></van-icon>
+            <van-stepper v-model="item.num" :step="1" :min="1" :name="item.id" 
+            @change="onChange"/>
         </div>
 
     </div>
