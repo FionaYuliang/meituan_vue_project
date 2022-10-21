@@ -5,7 +5,11 @@
     :items="items"  
     v-model:main-active-index="activeIndex"
     @click-nav="navClick">
-        <template #content>products</template>
+        <template #content>
+            <div v-for="(i, index) in subItem" class="item_bg">
+                <FoodAdd :item="i" :showAdd="true" :addClick="addClick" :onChange="onChange"></FoodAdd>
+            </div>   
+        </template>
     </van-tree-select>
 </div>
 <div v-else>{{ foodData.content }}</div>
@@ -13,39 +17,63 @@
 
 <script>
 import { reactive, toRefs,ref } from 'vue';
+import FoodAdd from './FoodAdd.vue';
 
 export default {
-    props:["activeIndex","foodData"],
-    setup(props){
+    props: ["activeIndex", "foodData"],
+    components: [FoodAdd],
+    setup(props) {
         let data = reactive({
             activeIndex: 0,
-            items: [ ],
+            items: [],
+            subItem:[],
         });
         const activeIndex = ref(0);
         //数据的初始化
         const init = () => {
             let newlist = [];
-            props.foodData?.items?.map((i)=>{
-                newlist.push({text: i.text});
+            props.foodData?.items?.map((i,index) => {
+                newlist.push({ text: i.text });
+                if(data.activeIndex === index){
+                    data.subItem = i.children;
+                }
             });
             data.items = newlist;
             console.log(newlist);
             console.log(data.items);
-        } 
+        };
         init();
         //点击左侧的导航
-        const navClick = (index) =>{
+        const navClick = (index) => {
             data.activeIndex = index;
             init();
         };
-    return {
-        ...toRefs(data),
-        navClick,
-      
-    };
-        
+        //切换步进器
+        const addClick = (id) =>{
+            data.subItem.forEach((item)=>{
+                if(item.id == i){
+                    item.add = false;
+                    item.num += 1;
+                }
+            })
+        }
+        //步进器增加触发事件
+        const onChange = (value,detail) =>{
+            data.subItem.forEach((item)=>{
+                if(item.id == detail.name){
+                    item.num = value;
+                }
+            })
+
+        }
+        return {
+            ...toRefs(data),
+            navClick,
+            addClick,
+            onChange
+        };
     },
-    
+    components: { FoodAdd }
 };
 </script>
 <style lang="less" scoped>
