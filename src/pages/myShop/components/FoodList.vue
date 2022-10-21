@@ -1,7 +1,7 @@
 <template>
 <div class="food_list" v-if="activeIndex === 0">
     <van-tree-select 
-    height="88vw" 
+    height="50vw" 
     :items="items"  
     v-model:main-active-index="activeIndex"
     @click-nav="navClick">
@@ -39,6 +39,7 @@ export default {
                 }
             });
             data.items = newlist;
+            //侧边栏展示不出来，感觉是data.items的原因，但是为啥内?
             console.log(newlist);
             console.log(data.items);
         };

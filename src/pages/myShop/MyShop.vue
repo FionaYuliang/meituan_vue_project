@@ -8,29 +8,34 @@
                     {{ title }}
                     <img :src="img" class="store_img" />
                 </div>
-            <div class="classify">
-                <van-tabs color="#ffc400">
-                    <van-tab v-for="(i, index) in storeData" :title="i.name">
-                        <FoodList :index="index" :foodData="i.data"></FoodList>
-                    </van-tab>
-                </van-tabs>
+                <div class="classify">
+                    <van-tabs color="#ffc400">
+                        <van-tab v-for="(i, index) in storeData" :title="i.name">
+                            <FoodList :index="index" :foodData="i.data"></FoodList>
+                        </van-tab>
+                    </van-tabs>
+                </div>
             </div>
-          
         </div>
-    </div>
+        <van-action-bar>
+          <van-action-bar-icon icon="chat-o" text="客服" @click="service"/>
+          <van-action-bar-icon icon="cart-o" text="购物车" badge="0" @click=""/>
+          <van-action-bar-button type="warning" text="加入购物车" @click=""/>
+          <van-action-bar-button type="danger" text="立即购买" @click=""/>
+        </van-action-bar>
     </div>
 </template>
 
 
 <script>
+import { Toast } from 'vant';
 import { reactive,toRefs } from 'vue';
 import Header from '../../components/Header.vue';
 import FoodList from './components/FoodList.vue';
-
 export default {
     components :{
     Header,
-    FoodList
+    FoodList,
 },
     setup(){
         let data = reactive({
@@ -111,10 +116,15 @@ export default {
         { name: "评价", data: { content: "评价" } },
         { name: "商家", data: { content: "商家" } },
       ],
-    });
-        return {
-            ...toRefs(data),
-        }
+      });
+
+      const service = () =>{
+        Toast.fail("waiting");
+      };
+      return {
+          ...toRefs(data),
+          service,
+      };
     }
 }
 </script>
