@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<<style lang='less' scoped>
+<style lang='less' scoped>
 .blank_content {
   flex: 1;
   margin: 20px;
