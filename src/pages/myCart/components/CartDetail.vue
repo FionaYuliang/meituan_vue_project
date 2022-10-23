@@ -22,6 +22,7 @@ import { useStore } from 'vuex';
 import FoodAdd from '@/components/FoodAdd.vue';
 import { computed } from '@vue/reactivity';
 import { STATEMENT_OR_BLOCK_KEYS } from '@babel/types';
+import { Toast } from 'vant';
 export default {
     components:{ FoodAdd },
     setup() {
@@ -88,13 +89,21 @@ export default {
           });
           return sum;
         });
-            // 总价
 
-
-
-
+        //要结算的数据
+        const updateCartData = () => {
+          return store.state.cartList.filter((item)=>
+                data.result.includes(item.id)
+          )
+        }
+           
         //结算按钮
         const onSubmit = () => {
+          if(data.result.length !== 0){
+            store.commit("PAY",updateCartData());
+          }else{
+            Toast.fail("请选择要结算的商品");
+          }
 
         };
         return {
