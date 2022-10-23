@@ -19,8 +19,8 @@
         </div>
         <van-action-bar>
           <van-action-bar-icon icon="chat-o" text="客服" @click="service"/>
-          <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" @click=""/>
-          <van-action-bar-button type="warning" text="加入购物车" @click="toCart"/>
+          <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" @click="toCart"/>
+          <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart"/>
           <van-action-bar-button type="danger" text="立即购买" @click="buyAction"/>
         </van-action-bar>
     </div>
@@ -34,7 +34,6 @@ import Header from '../../components/Header.vue';
 import FoodList from './components/FoodList.vue';
 import { useStore } from "vuex";
 import router, { useRouter } from 'vue-router';
-import { returnStatement } from '@babel/types';
 export default {
     components :{
     Header,
@@ -134,21 +133,21 @@ export default {
       }
       //加入购物车
       const handleAddCart = (type) => {
-        let carlist = [];
+        let cartlist = [];
         data.storeData.forEach((item)=>{
           item.data.items?.forEach((sub_item)=>{
             sub_item.children.forEach((subsub_item)=>{
               if(subsub_item.num > 0){
-                carlist.push(subsub_item);
+                cartlist.push(subsub_item);
               }
             })
           })
         })
-        if(carlist.length === 0){
+        if(cartlist.length === 0){
           Toast("请选择商品");
           return;
         }
-        store.commit('ADDCART',carlist);
+        store.commit('ADDCART',cartlist);
         type === 'buy' ? toCart() : "";
       };
       //点击立即购买
@@ -157,10 +156,10 @@ export default {
       }
 
       return {
+          store,
           ...toRefs(data),
           service,
           handleAddCart,
-          store,
           buyAction,
           toCart
       };

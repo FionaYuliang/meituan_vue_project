@@ -7,7 +7,7 @@
     @click-nav="navClick">
         <template #content>
             <div v-for="(i, index) in subItem" class="item_bg">
-                <FoodAdd :item="i" :showAdd="true" :addClick="addClick" :onChange="onChange" :showCheckBox="true"></FoodAdd>
+                <FoodAdd :item="i" :showAdd="true" :addClick="addClick" :onChange="onChange" :showCheckBox="false"></FoodAdd>
             </div>   
         </template>
     </van-tree-select>
@@ -17,11 +17,11 @@
 
 <script>
 import { reactive, toRefs,ref } from 'vue';
-import FoodAdd from './FoodAdd.vue';
+import FoodAdd from '../../../components/FoodAdd.vue';
 
 export default {
     props: ["foodData"],
-    components: [FoodAdd],
+    components: { FoodAdd },
     setup(props) {
         let data = reactive({
             activeIndex: 0,
@@ -70,7 +70,7 @@ export default {
             onChange,
         };
     },
-    components: { FoodAdd }
+    
 };
 </script>
 <style lang="less" scoped>

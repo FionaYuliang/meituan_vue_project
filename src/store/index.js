@@ -5,7 +5,8 @@ export default createStore({
         cartList:[],//购物车数据
     },
     //同步执行的方法
-    mutation:{
+    mutations:{
+        //加入购物车
         ADDCART(state, value){
             state.cartList = value;
         },
