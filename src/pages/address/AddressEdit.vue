@@ -39,4 +39,13 @@
        }
    }
    </script>
+   <style lang='less' scoped>
+   /deep/ .van-button--danger {
+     background-color: #ffc400;
+     border-color: #ffc400;
+   }
+   /deep/ .van-switch--on {
+     background-color: #ffc400;
+   }
+   </style>
    
