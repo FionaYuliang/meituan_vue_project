@@ -81,7 +81,6 @@ export default {
 
             //从购物车数据中删除已下单的
             let cartRemainder = store.state.cartList.filter((item) => {
-                console.log("route.query",route.query);
                 return !route.query.list.includes(item.id + "");
             });
             
