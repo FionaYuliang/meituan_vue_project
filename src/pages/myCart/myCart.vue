@@ -1,7 +1,7 @@
 <template>
     <div class="cart">
         <Header title="购物车" :isedit="true"></Header>
-        <CartDetail v-if="isShow"></CartDetail>
+        <CartDetail v-if="isShow" :init="init"></CartDetail>
         <Blank v-else></Blank>
         <Footer></Footer>
     </div>
@@ -35,6 +35,7 @@ export default {
 
      return {
         store,
+        init,
         isShow,
      }
     }

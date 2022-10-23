@@ -17,9 +17,9 @@
           <!-- 删除 -->
           <div class="buy" v-else>
             <div class="left">
-              <van-checkbox v-model="checked" checked-color="#ffc400" @click="choseAll">全选</van-checkbox>
+              <van-checkbox v-model="checked" checked-color="#ffc400" @click="toggleAll">全选</van-checkbox>
             </div>
-            <div class="delete">删除</div>
+            <div class="delete" @click="deleteClick">删除</div>
           </div>
     </div>
 </template>
@@ -35,29 +35,25 @@ import { Toast } from 'vant';
 import emitter from '../../../common/js/eventbus.js';
 export default {
     components:{ FoodAdd },
-    setup() {
+    props:["init"],
+    setup(props) {
         const store = useStore();
         const router = useRouter();
         let data = reactive({
             result:[],
             checked: true,
             isdelete: false,
-        })
+        });
       
         const checkboxGroup = ref(null);
-
-        //全局事件监听
-        emitter.on("edit",() => {
-          data.isdelete = !data.isdelete;
-        })
     
       //初始化所有商品的选中
         const init = () =>{
           data.result = store.state.cartList.map((item)=> item.id);
-        }
+        };
         onMounted(()=>{
           init();
-        })
+        });
         //商品个数要在各处保持同步
         const onChange = (value, detail) =>{
           store.state.cartList.map((item)=>{
@@ -75,14 +71,14 @@ export default {
             data.checked = false;
           }
           data.result = checkedArr;
-        }
+        };
 
         //全选checkAll或者取消全选
         const toggleAll = () => {
           if(data.result.length == store.state.cartList.length){
             data.result = [];
           }else{
-            init();
+            props.init();
           }
         };
       
@@ -93,12 +89,18 @@ export default {
         //     checkboxGroup.value.toggleAll(true);
         // };
 
+          //更新数据通用方法
+          const updateCartData = (type) => {
+          return store.state.cartList.filter((item)=>{
+            return type === 2 
+              ? data.result.includes(item.id)
+              : !data.result.includes(item.id)
+          })
+        };
 
         //计算总价
         const totalPrice = computed(()=>{
-          let countlist = store.state.cartList.filter((item)=>
-            data.result.includes(item.id)
-          );
+          let countlist = updateCartData(2);
           let sum = 0;
           countlist.forEach((item) => {
             sum += item.num * item.price;
@@ -106,25 +108,39 @@ export default {
           return sum;
         });
 
-        //要结算的数据
-        const updateCartData = () => {
-          return store.state.cartList.filter((item)=>
-                data.result.includes(item.id)
-          )
-        }
-           
+      
+
         //结算按钮
         const onSubmit = () => {
           if(data.result.length !== 0){
-            store.commit("PAY",updateCartData());
+            store.commit("PAY",updateCartData(2));
             Toast("下单成功！");
             router.push('/order');   
           }else{
             Toast.fail("请选择要结算的商品");
-          };
-
-        
+          };        
         };
+
+        //监听编辑时的点击
+        emitter.on("edit",() => {
+          data.isdelete = !data.isdelete;
+        });
+
+        //删除购物车内的商品
+        const deleteClick = () => {
+          if(data.result.length){
+            //更新删除后的购物车数据
+            store.commit('DELETE',updateCartData(1));
+            //清空原来选择的
+            data.result = [];
+            //刷新，此处用的是父组件传过来的初始化函数
+            props.init();
+          }else{
+            Toast.fail("没有选中商品");
+          }
+        };
+
+ 
         return {
             store,
             ...toRefs(data),
@@ -132,7 +148,7 @@ export default {
             checkboxGroupChange,
             onChange,
             onSubmit,
-          
+            deleteClick,
             toggleAll,
             totalPrice,
         };
@@ -153,7 +169,7 @@ export default {
 
   .buy {
     position: fixed;
-    bottom: 58px;
+    bottom: 48px;
     right: 0;
     display: flex;
     justify-content: space-between;

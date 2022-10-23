@@ -14,6 +14,10 @@ export default createStore({
         //结算商品
         PAY(state, value){
             state.orderList = value;
+        },
+        //从购物车中删除数据
+        DELETE(state, value){
+            state.cartList = value;
         }
 
     },
