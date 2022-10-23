@@ -1,5 +1,5 @@
 <template>
-<div class="food_list" v-if="activeIndex === 0">
+<div class="food_list">
     <van-tree-select 
     height="50vw" 
     :items="items"  
@@ -7,12 +7,12 @@
     @click-nav="navClick">
         <template #content>
             <div v-for="(i, index) in subItem" class="item_bg">
-                <FoodAdd :item="i" :showAdd="true" :addClick="addClick" :onChange="onChange"></FoodAdd>
+                <FoodAdd :item="i" :showAdd="true" :addClick="addClick" :onChange="onChange" :showCheckBox="true"></FoodAdd>
             </div>   
         </template>
     </van-tree-select>
 </div>
-<div v-else>{{ foodData.content }}</div>
+<!-- <div v-else>{{ foodData.content }}</div> -->
 </template>
 
 <script>
@@ -20,7 +20,7 @@ import { reactive, toRefs,ref } from 'vue';
 import FoodAdd from './FoodAdd.vue';
 
 export default {
-    props: ["activeIndex", "foodData"],
+    props: ["foodData"],
     components: [FoodAdd],
     setup(props) {
         let data = reactive({
@@ -28,7 +28,6 @@ export default {
             items: [],
             subItem:[],
         });
-        const activeIndex = ref(0);
         //数据的初始化
         const init = () => {
             let newlist = [];
@@ -39,9 +38,6 @@ export default {
                 }
             });
             data.items = newlist;
-            //侧边栏展示不出来，感觉是data.items的原因，但是为啥内?
-            console.log(newlist);
-            console.log(data.items);
         };
         init();
         //点击左侧的导航
@@ -50,7 +46,7 @@ export default {
             init();
         };
         //切换步进器
-        const addClick = (id) =>{
+        const addClick = (i) =>{
             data.subItem.forEach((item)=>{
                 if(item.id == i){
                     item.add = false;
@@ -71,7 +67,7 @@ export default {
             ...toRefs(data),
             navClick,
             addClick,
-            onChange
+            onChange,
         };
     },
     components: { FoodAdd }
