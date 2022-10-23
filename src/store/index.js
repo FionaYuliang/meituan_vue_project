@@ -47,11 +47,11 @@ export default createStore({
         },
         //购物车右上角编辑按钮
         CARTEDIT(state){
-            state.cartEdit = !state.cartEdit;
+            state.cartEdit = !state.cartEdit; 
         },
         //更新已下单列表
         UPDATEORDER(state, value){
-            state.orderedList = value;
+            state.orderedList = state.orderedList.concat(state.orderList);
         }
 
     },
