@@ -5,9 +5,9 @@
         <div class="content">
             <div v-for="(i,index) in store.state.orderList" :key="index">
                 <van-card
-                    :num=i.num
+                    :num="i.num"
                     :price="i.price"
-                    :title="i.name"
+                    :title="i.title"
                     :thumb="i.pic"
                     />
             </div>
@@ -15,7 +15,7 @@
         <div class="pay_wrap">
             <div class="price">
                 <span>商品金额</span>
-                <span>￥{{ orderPrice}}</span>
+                <span>￥{{ orderPrice }}</span>
             </div>
             <van-button type="primary" class="pay-btn" @click="handleCreateOrder" color="#ffc400" block>生成订单</van-button>
 
@@ -27,13 +27,15 @@
 import Header from '@/components/Header.vue';
 import { reactive, toRefs, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { Toast } from 'vant';
+import { Dialog } from 'vant';
 export default {
     components: { Header },
     setup(){
         const store = useStore();
         const router = useRouter();
+        const route = useRoute();
         let data = reactive({
             selectedUser:{
                 name:'',
@@ -45,11 +47,11 @@ export default {
         //用户信息初始化
         const initUser = () => {
             store.state.userAddress.forEach((item)=>{
-                if(item.isDafault == true){
+                if(item.isDefault){
                     data.selectedUser.name = item.name;
                     data.selectedUser.tel = item.tel;
                 }
-            })
+            });
         };
         //编辑联系人
         const onEdit = () =>{
@@ -62,16 +64,30 @@ export default {
                 store.state.orderList.forEach((item)=>{
                     price += item.num * item.price;
                 })
-                data.allPrice = price;
+                data.orderPrice = price;
             }
 
         };
         onMounted(()=>{
+            initUser();
             allPrice();
         })
         //生成订单按钮
-        const handleCreateOrder = () => {
+        const handleCreateOrder = async () => {
+            await Dialog.alert({
+                title: '提示',
+                message: '恭喜！您的订单已完成',
+            })
 
+            //从购物车数据中删除已下单的
+            let cartRemainder = store.state.cartList.filter((item) => {
+                console.log("route.query",route.query);
+                return !route.query.list.includes(item.id + "");
+            });
+            
+            store.commit('DELETE',cartRemainder);
+            store.commit('UPDATEORDER');//更新已下单列表
+            router.push('/order');
         };
 
         return {

@@ -114,7 +114,13 @@ export default {
         const onSubmit = () => {
           if(data.result.length !== 0){
             store.commit("PAY",updateCartData(2));
-            router.push('/createorder');   
+            //带着选中项跳转到创建订单组件
+            router.push({
+              path:'/createorder',
+              query: {
+                list: data.result,
+              },
+            });
           }else{
             Toast.fail("请选择要结算的商品");
           };        

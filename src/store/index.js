@@ -4,8 +4,9 @@ export default createStore({
     state:{
         cartList:[],//购物车数据
         orderList:[],//生成订单列表数据
+        orderedList: [],//已下单列表
         cartEdit: true,//购物车的编辑功能
-        useraAddress:[
+        userAddress: [
             {
                 id:1001,
                 name:'yangmingming',
@@ -44,8 +45,13 @@ export default createStore({
         DELETE(state, value){
             state.cartList = value;
         },
+        //购物车右上角编辑按钮
         CARTEDIT(state){
             state.cartEdit = !state.cartEdit;
+        },
+        //更新已下单列表
+        UPDATEORDER(state, value){
+            state.orderedList = value;
         }
 
     },
