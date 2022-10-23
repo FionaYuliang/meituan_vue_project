@@ -30,7 +30,15 @@ const router = createRouter({
         {
             path: '/createorder',
             component: () => import('../pages/createOrder/CreateOrder')
-        }
+        },
+        {
+            path: '/address',
+            component: () => import('../pages/address/Address')
+        },
+        {
+            path: '/addressedit',
+            component: () => import('../pages/address/AddressEdit')
+        },
     ]
 })
 
