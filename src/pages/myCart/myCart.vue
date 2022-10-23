@@ -1,6 +1,6 @@
 <template>
     <div class="cart">
-        <Header title="购物车"></Header>
+        <Header title="购物车" :isEdit="true"></Header>
         <CartDetail v-if="isShow"></CartDetail>
         <Blank v-else></Blank>
         <Footer></Footer>

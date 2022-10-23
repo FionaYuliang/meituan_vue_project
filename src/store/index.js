@@ -11,6 +11,7 @@ export default createStore({
         ADDCART(state, value){
             state.cartList = value;
         },
+        //结算商品
         PAY(state, value){
             state.orderList = value;
         }

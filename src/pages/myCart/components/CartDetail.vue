@@ -9,8 +9,14 @@
             </van-checkbox-group>
         </div>
          <!-- 结算 -->
-         <van-submit-bar :price="totalPrice * 100" @submit="onSubmit"  
+         <van-submit-bar :price="totalPrice * 100" @submit="onSubmit"  v-if="isdelete === false"
          button-text="结算" class="submit-all" button-color="#ffc400">
+          <van-checkbox v-model="checked" checked-color="#ffc400" @change="toggleAll">全选</van-checkbox>
+          </van-submit-bar>
+
+          <!-- 删除 -->
+          <van-submit-bar :price="totalPrice * 100" @submit="onDelete"   v-else
+         button-text="删除" class="submit-all" button-color="#ffc400">
           <van-checkbox v-model="checked" checked-color="#ffc400" @change="toggleAll">全选</van-checkbox>
           </van-submit-bar>
     </div>
@@ -19,6 +25,7 @@
 <script>
 import { reactive, toRefs, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import FoodAdd from '@/components/FoodAdd.vue';
 import { computed } from '@vue/reactivity';
 import { STATEMENT_OR_BLOCK_KEYS } from '@babel/types';
@@ -27,14 +34,15 @@ export default {
     components:{ FoodAdd },
     setup() {
         const store = useStore();
+        const router = useRouter();
         let data = reactive({
             result:[],
             checked: true,
+            isdelete: false,
         })
       
         const checkboxGroup = ref(null);
-      
-
+    
       //初始化所有商品的选中
         const init = () =>{
           data.result = store.state.cartList.map((item)=> item.id);
@@ -101,9 +109,17 @@ export default {
         const onSubmit = () => {
           if(data.result.length !== 0){
             store.commit("PAY",updateCartData());
+            Toast("下单成功！");
+            router.push('/order');   
           }else{
             Toast.fail("请选择要结算的商品");
-          }
+          };
+
+          //删除
+
+          const onDelete = () => {
+
+          };
 
         };
         return {
@@ -113,6 +129,7 @@ export default {
             checkboxGroupChange,
             onChange,
             onSubmit,
+            onDelete,
             toggleAll,
             totalPrice,
         };
