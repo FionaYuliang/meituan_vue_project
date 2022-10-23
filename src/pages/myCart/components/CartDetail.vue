@@ -9,7 +9,7 @@
             </van-checkbox-group>
         </div>
          <!-- 结算 -->
-         <van-submit-bar :price="totalPrice" @submit="onSubmit"  
+         <van-submit-bar :price="totalPrice * 100" @submit="onSubmit"  
          button-text="结算" class="submit-all" button-color="#ffc400">
           <van-checkbox v-model="checked" checked-color="#ffc400" @change="toggleAll">全选</van-checkbox>
           </van-submit-bar>
@@ -79,15 +79,18 @@ export default {
 
         //计算总价
         const totalPrice = computed(()=>{
-          let countlist = store.state.cartList.filter((item)=>{
-            data.result.includes(item.id);
-          });
+          let countlist = store.state.cartList.filter((item)=>
+            data.result.includes(item.id)
+          );
           let sum = 0;
           countlist.forEach((item) => {
             sum += item.num * item.price;
           });
           return sum;
         });
+            // 总价
+
+
 
 
         //结算按钮
