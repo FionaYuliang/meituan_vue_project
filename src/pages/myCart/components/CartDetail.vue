@@ -2,7 +2,7 @@
     <div class="cart_details">
         <!-- 商品的列表 -->
         <div class="content">
-            <van-checkbox-group v-model="result" @change="checkboxGroupChange">
+            <van-checkbox-group v-model="result" ref="checkboxGroup" @change="checkboxGroupChange">
                 <div v-for="(i, index) in store.state.cartList">
                     <FoodAdd :item="i" :onChange="onChange" :showCheckBox="true"></FoodAdd>
                 </div>
@@ -28,7 +28,7 @@ export default {
         const store = useStore();
         let data = reactive({
             result:[],
-            checked:true,
+            checked: true,
         })
       
         const checkboxGroup = ref(null);
@@ -62,11 +62,19 @@ export default {
 
         //全选checkAll或者取消全选
         const toggleAll = () => {
-            checkboxGroup.value.toggleAll();
+          if(data.result.length == store.state.cartList.length){
+            data.result = [];
+          }else{
+            init();
+          }
         };
-        const checkAll = () => {
-            checkboxGroup.value.toggleAll(true);
-        };
+      
+        // const toggleAll = () => {
+        //     checkboxGroup.value.toggleAll();
+        // };
+        // const checkAll = () => {
+        //     checkboxGroup.value.toggleAll(true);
+        // };
 
 
         //计算总价
@@ -79,7 +87,7 @@ export default {
             sum += item.num * item.price;
           });
           return sum;
-        })
+        });
 
 
         //结算按钮
@@ -90,16 +98,13 @@ export default {
             store,
             ...toRefs(data),
             onMounted,
-            checkAll,
-            toggleAll,
             checkboxGroupChange,
             onChange,
             onSubmit,
+            toggleAll,
             totalPrice,
-
         };
     },
-    components: { FoodAdd }
 }
 </script>
 <style lang='less' scoped>
