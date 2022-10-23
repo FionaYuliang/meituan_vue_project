@@ -5,6 +5,30 @@ export default createStore({
         cartList:[],//购物车数据
         orderList:[],//生成订单列表数据
         cartEdit: true,//购物车的编辑功能
+        useraAddress:[
+            {
+                id:1001,
+                name:'yangmingming',
+                tel:'15340126264',
+                province:'',
+                city:'',
+                county:'',
+                addressDetail:'',
+                isDefault:true,
+                areaCode:'',
+            },
+            {
+                id:1002,
+                name:'yaozeyuan',
+                tel:'18354236262',
+                province:'',
+                city:'',
+                county:'',
+                addressDetail:'',
+                isDefault:true,
+                areaCode:'',
+            },
+        ]
     },
     //同步执行的方法
     mutations:{

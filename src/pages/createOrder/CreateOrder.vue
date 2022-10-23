@@ -1,7 +1,7 @@
 <template>
     <div class="create_order">
         <Header title="生成订单"></Header>
-        <van-contact-card type="edit" :tel="tel" :name="name" @click="onEdit" />
+        <van-contact-card type="edit" :tel="selectedUser.tel" :name="selectedUser.name" @click="onEdit" />
         <div class="content">
             <div v-for="(i,index) in store.state.orderList" :key="index">
                 <van-card
@@ -35,10 +35,22 @@ export default {
         const store = useStore();
         const router = useRouter();
         let data = reactive({
-            tel:'15340126264',
-            name:'yangmm',
+            selectedUser:{
+                name:'',
+                tel:'',
+            },
             orderPrice: 0,
         });
+
+        //用户信息初始化
+        const initUser = () => {
+            store.state.userAddress.forEach((item)=>{
+                if(item.isDafault == true){
+                    data.selectedUser.name = item.name;
+                    data.selectedUser.tel = item.tel;
+                }
+            })
+        };
         //编辑联系人
         const onEdit = () =>{
 
@@ -65,6 +77,8 @@ export default {
         return {
             ...toRefs(data),
             store,
+            initUser,
+            onEdit,
             allPrice,
             handleCreateOrder,
         }
