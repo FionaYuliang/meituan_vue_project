@@ -45,7 +45,7 @@ export default {
             isdelete: false,
         });
       
-        const checkboxGroup = ref(null);
+        // const checkboxGroup = ref(null);
     
       //初始化所有商品的选中
         const init = () =>{
@@ -78,7 +78,7 @@ export default {
           if(data.result.length == store.state.cartList.length){
             data.result = [];
           }else{
-            props.init();
+            init();
           }
         };
       

@@ -3,7 +3,7 @@
         <van-icon name="arrow-left" class="icon" @click="toback">
         </van-icon>
         <div>{{ title }}</div>
-        <div class="edit" v-if="isedit" @click="editClick">编辑</div>
+        <div class="edit" v-if="isedit" @click="editClick">{{ store.state.cartEdit ? "编辑" : "完成"}}</div>
     </div>
 </template>
 <script>
@@ -22,12 +22,14 @@ export default {
       //编辑按钮，触发全局事件总线
       const editClick = () =>{
         if(store.state.cartList.length) {
+          store.commit("CARTEDIT");
           emitter.emit("edit");
         }else{
-          Toast.fail("空空如也，快去选购吧！");
+          Toast.fail("购物车空空如也");
         }
       };
       return {
+        store,
         toback,
         editClick,
       };

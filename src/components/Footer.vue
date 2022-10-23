@@ -7,7 +7,7 @@
     </div>
     <div class="item">
         <router-link to="/cart" class="nav_item" active-class="nav_color">
-            <van-icon name="shopping-cart-o" size="30"/>购物车</router-link>
+            <van-icon name="shopping-cart-o" size="30" :badge="store.state.cartList.length"/>购物车</router-link>
     </div>
     <div class="item">
         <router-link to="/order" class="nav_item" active-class="nav_color">
@@ -21,7 +21,18 @@
 
     </template>
     <script>
-    export default {}
+    import { useStore } from 'vuex';
+    export default {
+      setup(){
+        const store = useStore();
+    
+        return {
+          store,
+        }
+      }
+     
+
+    }
     </script>
   <style lang='less' scoped>
   .footer {
