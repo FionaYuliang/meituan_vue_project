@@ -3,7 +3,7 @@ import App from './App.vue';
 import 'amfe-flexible';
 import {Button, Icon, Tab, Tabs, TreeSelect, 
     Stepper, ActionBar, ActionBarIcon, ActionBarButton,
-    Checkbox, CheckboxGroup,SubmitBar} from 'vant'
+    Checkbox, CheckboxGroup, SubmitBar, ContactCard, Card} from 'vant'
 import 'vant/lib/index.css';
 import router from '../src/router/index';
 import '../src/common/css/base.less';
@@ -22,7 +22,9 @@ use(ActionBarIcon).
 use(ActionBarButton).
 use(Checkbox).
 use(CheckboxGroup).
-use(SubmitBar);
+use(SubmitBar).
+use(ContactCard).
+use(Card);
 
 app.use(router);
 app.use(store);

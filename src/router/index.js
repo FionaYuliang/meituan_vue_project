@@ -26,6 +26,10 @@ const router = createRouter({
         {
             path: '/shop',
             component: () => import('../pages/myShop/MyShop'),
+        },
+        {
+            path: '/createorder',
+            component: () => import('../pages/createOrder/CreateOrder')
         }
     ]
 })

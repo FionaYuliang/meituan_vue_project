@@ -114,8 +114,7 @@ export default {
         const onSubmit = () => {
           if(data.result.length !== 0){
             store.commit("PAY",updateCartData(2));
-            Toast("下单成功！");
-            router.push('/order');   
+            router.push('/createorder');   
           }else{
             Toast.fail("请选择要结算的商品");
           };        
