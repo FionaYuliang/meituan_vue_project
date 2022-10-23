@@ -2,7 +2,13 @@
     <div class="order">
        <Header title="新增地址"></Header>
        <div class="content">
-         
+        <van-address-edit
+            :area-list="areaList"
+            show-delete
+            show-set-default
+            @save="onSave"
+            @delete="onDelete"
+            />
        </div>
     </div>
    </template>

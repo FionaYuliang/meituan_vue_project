@@ -2,7 +2,14 @@
     <div class="order">
        <Header title="地址管理"></Header>
        <div class="content">
-         
+        <van-address-list
+            v-model="chosenAddressId"
+            :list="list"
+            :disabled-list="disabledList"
+            default-tag-text="默认"
+            @add="onAdd"
+            @edit="onEdit"
+        />
        </div>
     </div>
    </template>
