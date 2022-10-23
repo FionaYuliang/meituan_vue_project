@@ -15,10 +15,12 @@
           </van-submit-bar>
 
           <!-- 删除 -->
-          <van-submit-bar :price="totalPrice * 100" @submit="onDelete"   v-else
-         button-text="删除" class="submit-all" button-color="#ffc400">
-          <van-checkbox v-model="checked" checked-color="#ffc400" @change="toggleAll">全选</van-checkbox>
-          </van-submit-bar>
+          <div class="buy" v-else>
+            <div class="left">
+              <van-checkbox v-model="checked" checked-color="#ffc400" @click="choseAll">全选</van-checkbox>
+            </div>
+            <div class="delete">删除</div>
+          </div>
     </div>
 </template>
 
@@ -30,6 +32,7 @@ import FoodAdd from '@/components/FoodAdd.vue';
 import { computed } from '@vue/reactivity';
 import { STATEMENT_OR_BLOCK_KEYS } from '@babel/types';
 import { Toast } from 'vant';
+import emitter from '../../../common/js/eventbus.js';
 export default {
     components:{ FoodAdd },
     setup() {
@@ -42,6 +45,11 @@ export default {
         })
       
         const checkboxGroup = ref(null);
+
+        //全局事件监听
+        emitter.on("edit",() => {
+          data.isdelete = !data.isdelete;
+        })
     
       //初始化所有商品的选中
         const init = () =>{
@@ -115,12 +123,7 @@ export default {
             Toast.fail("请选择要结算的商品");
           };
 
-          //删除
-
-          const onDelete = () => {
-
-          };
-
+        
         };
         return {
             store,
@@ -129,7 +132,7 @@ export default {
             checkboxGroupChange,
             onChange,
             onSubmit,
-            onDelete,
+          
             toggleAll,
             totalPrice,
         };
