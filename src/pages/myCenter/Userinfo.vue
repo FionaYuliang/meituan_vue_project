@@ -31,7 +31,20 @@ setup(){
     });
 
     const save = () =>{
-        
+        if(data.username && data.password){
+            let userinfo = JSON.parse(localStorage.userInfo);
+            let newUserinfo = {
+                用户名: data.username || userinfo["用户名"],
+                密码: data.password || userinfo["密码"],
+            };
+            localStorage.setItem("userInfo",JSON.stringify(newUserinfo));
+            Toast("修改成功");
+            router.push("./center");
+
+        }else{
+            Toast("请输入内容");
+        }
+
     };
 
     const logout = () =>{
