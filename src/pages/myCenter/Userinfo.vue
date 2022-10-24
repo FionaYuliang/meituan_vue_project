@@ -16,6 +16,7 @@ import Header from '../../components/Header.vue';
 import { useStore }  from 'vuex';
 import { useRouter} from 'vue-router';
 import Footer from '@/components/Footer.vue';
+import { Toast } from 'vant';
 
 export default { 
 components: { Header, Footer },
@@ -24,15 +25,27 @@ setup(){
     const router = useRouter();
     
     let data = reactive({
-    
-
+        username:"",
+        intro:"",
+        password:"",
     });
 
+    const save = () =>{
+        
+    };
 
+    const logout = () =>{
+        localStorage.removeItem("isLogin");
+        Toast("已退出");
+        router.push('./login');
+    };
+    
     return {
         ...toRefs(data),
         store,
-    
+        save,
+        logout,
+
     }
 }
 }   
