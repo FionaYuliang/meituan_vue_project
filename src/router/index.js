@@ -49,7 +49,7 @@ const router = createRouter({
         },
         {
             path: '/userinfoedit',
-            component: () => import('../pages/myCenter/userinfoedit')
+            component: () => import('../pages/myCenter/Userinfo')
         },
     ]
 })
