@@ -26,7 +26,7 @@
                 </van-button>
             </div>
             <div style="margin: 16px;">
-                <van-button round block type="primary" @click="register"  color="#ffc400">
+                <van-button round block type="primary" @click="toRegister"  color="#ffc400">
                 注册
                 </van-button>
             </div>
@@ -55,7 +55,7 @@ setup(){
 
     };
 
-    const register = () => {
+    const toRegister = () => {
         router.push('./register');
     }
 
@@ -63,7 +63,7 @@ setup(){
         ...toRefs(data),
         store,
         submit,
-        register,
+        toRegister,
     }
 }
 }   
