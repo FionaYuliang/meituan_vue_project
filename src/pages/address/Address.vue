@@ -33,7 +33,7 @@
                     name: item.name,
                     tel: item.tel,
                     address: `${item.province}${item.city}${item.county}${item.addressDetail}`,
-                    isDefault: item.isDefault,
+                    isDefault: !!item.isDefault,
                 }
             });
             //如何把默认的放在第一个
