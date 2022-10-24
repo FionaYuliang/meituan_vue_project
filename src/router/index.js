@@ -39,6 +39,10 @@ const router = createRouter({
             path: '/addressedit',
             component: () => import('../pages/address/AddressEdit')
         },
+        {
+            path: '/userinfoedit',
+            component: () => import('../pages/myCenter/userinfoedit')
+        },
     ]
 })
 
