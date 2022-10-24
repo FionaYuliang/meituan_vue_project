@@ -1,7 +1,8 @@
 <template>
-    <Header title="新增地址"></Header>
+    <Header :title = "addresstitle"></Header>
     <van-address-edit
         :area-list="areaList"
+        :address-info="addressInfo"
         show-delete
         show-set-default
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
@@ -10,11 +11,13 @@
     />
 </template>
 <script>
-   import { reactive, toRefs } from 'vue';
+   import { onMounted, reactive, toRefs } from 'vue';
    import Header from '../../components/Header.vue';
    import { useStore }  from 'vuex';
-   import { area } from 'vant';
-   import { useRouter } from 'vue-router';
+   import { useRouter, useRoute } from 'vue-router';
+   import { computed } from '@vue/reactivity';
+   import { Toast } from 'vant';
+
    
     
    export default { 
@@ -22,6 +25,8 @@
        setup(){
            const store = useStore();
            const router = useRouter();
+           const route = useRoute();
+
            let data = reactive({
             areaList: {
                 province_list: {
@@ -40,25 +45,62 @@
                     120102: "崂山区",
                     130102: "李沧区",
                 },
-      },
+            },
+            addressInfo : {},
+          
            });
 
+           const addresstitle = computed(()=>{
+            return route.query.type === 'add' ? "新增地址" : "编辑地址";
+           })
+
+           //页面初始化
+           const init = () => {
+            store.state.userAddress.forEach((item)=>{
+                if(item.id === Number(route.query.id)){
+                    data.addressInfo = item;
+                }
+            });
+           };
+
+           onMounted(()=>{
+            init();
+           });
 
            //保存地址
-           const onSave = (info) => {
+           const onSave = (item) => {
+                if(route.query.type ===  'add'){
+                    store.commit("ADDNEWADDR",item);
+                    Toast("添加成功");
+                }else if(route.query.type === 'edit'){
+                    store.commit("CHANGEADDR",item);
+                    Toast("修改成功");
+                }else {
+                    Toast.fail('参数错误');
+                }
+                setTimeout(() =>{
+                    router.back();
+                },1000);
 
            };
 
            //删除地址
-           const onDelete = () => {
-
+           const onDelete = (item) => {
+                store.commit("DELETEADDR",item);
+                Toast("删除成功");
+                setTimeout(() =>{
+                    router.back();
+                },1000);
             };
    
            return {
                ...toRefs(data),
                store,
+               addresstitle,
+               onMounted,
                onSave,
                onDelete, 
+              
            }
        }
    }

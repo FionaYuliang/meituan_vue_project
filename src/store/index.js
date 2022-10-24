@@ -55,14 +55,31 @@ export default createStore({
         },
         //新增地址
         ADDNEWADDR(state,value){
-
+            if(value.isDefault){
+                state.userAddress.map((item)=>{
+                    item.isDefault = false;
+                });
+            }
+            state.userAddress.push(value);
         },
         //编辑地址
         CHANGEADDR(state,value){
-            
+           state.userAddress = state.userAddress.map((item)=> {
+            if(value.isDefault){
+                item.isDefault = false;
+            }
+            return item.id === value.id ? value : item;
+           })
         },
         //删除地址
         DELETEADDR(state,value){
+            state.userAddress = state.userAddress.map((item)=>{
+                return !(value.id === item.id);
+
+            });
+            if(value.isDefault && state.userAddress.length){
+                state.userAddress[0].isDefault = true;
+            }
             
         },
 
