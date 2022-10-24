@@ -12,7 +12,7 @@
                     />
             </div>
         </div>
-        <div class="pay_wrap">
+        <div class="pay-wrap">
             <div class="price">
                 <span>商品金额</span>
                 <span>￥{{ orderPrice }}</span>

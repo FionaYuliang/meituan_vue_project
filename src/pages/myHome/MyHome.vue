@@ -2,9 +2,7 @@
     <div class="home">
         <div class="content">
             <div class="header">
-                <div class="text">
-
-                </div>
+                <div class="text">外卖</div>
                 <div class="location">
                     <van-icon name="location" />
           <span>安宁庄路1号</span>
@@ -15,7 +13,7 @@
                 <div class="main_bg">
                     <div class="search">
                         <input type="text" />
-                        <div class="search_text">search</div>
+                        <div class="search_text">搜索</div>
                     </div>
                     <div class="classify">
                         <div class="big_classify">
@@ -60,23 +58,23 @@ export default {
     setup(){
         let data = reactive({
         big_classify: [
-        { name: "美食", icon: "icon-apple-and-pear" },
-        { name: "甜点饮品", icon: "icon-tianpin" },
+        { name: "美食", icon: "icon-meishi" },
+        { name: "甜点饮品", icon: "icon-tiandian" },
         { name: "超市便利", icon: "icon-chaoshi" },
-        { name: "生鲜果蔬", icon: "icon-shuiguo" },
-        { name: "滴团买药", icon: "icon-yaopin" },
+        { name: "生鲜果蔬", icon: "icon-ningmengshuiguotiandian" },
+        { name: "美团买药", icon: "icon-yaopin" },
       ],
       small_classify: [
-        { name: "午餐", icon: "icon-iconfonttubiaozhizuo-1" },
-        { name: "买酒", icon: "icon-iconfonttubiaozhizuo-" },
+        { name: "午餐", icon: "icon-canyinmeishi" },
+        { name: "买酒", icon: "icon-jiu" },
         { name: "新鲜水果", icon: "icon-iconfonttubiaozhizuo-" },
-        { name: "汉堡披萨", icon: "icon-iconfonttubiaozhizuo-6" },
-        { name: "休闲饮品", icon: "icon-iconfonttubiaozhizuo-8" },
+        { name: "汉堡披萨", icon: "icon-hanbaobao" },
+        { name: "休闲饮品", icon: "icon-cha1" },
         { name: "夜宵", icon: "icon-iconfonttubiaozhizuo-3" },
         { name: "吐司", icon: "icon-iconfonttubiaozhizuo-5" },
         { name: "跑腿", icon: "icon-paotuiAPP" },
-        { name: "美人佳丽", icon: "icon-iconfonttubiaozhizuo-2" },
-        { name: "全部分类", icon: "icon-fenlei" },
+        { name: "美人佳丽", icon: "icon-kouhong1" },
+        { name: "全部分类", icon: "icon-quanbufenlei" },
       ],
       content_nav_list: [
         {

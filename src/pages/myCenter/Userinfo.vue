@@ -26,7 +26,7 @@ setup(){
     
     let data = reactive({
         username:"",
-        intro:"",
+        intro:"吃饭不积极，思想有问题",
         password:"",
     });
 

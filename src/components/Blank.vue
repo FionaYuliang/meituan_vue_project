@@ -1,8 +1,6 @@
 <template>
-    <div class="blank_contnet">
-        <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-dakaidehezihuowu"></use>
-    </svg>
+    <div class="blank_content">
+      <!-- <img src="../assets/pic_blank.png"/> -->
     空空如也
     </div>
 </template>
