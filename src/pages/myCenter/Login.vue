@@ -53,12 +53,12 @@ setup(){
     });
 
     const onSubmit = (info) => {
-        if(!localStorage.userinfo){
+        if(!localStorage.userInfo){
             Toast("账号不存在");
         }else{
-            let userinfo = JSON.parse(localStorage.userinfo);
-            if(userinfo[""] === info[""]){
-                if(userinfo[""] === info[""]){
+            let userinfo = JSON.parse(localStorage.userInfo);
+            if(userinfo["用户名"] === info["用户名"]){
+                if(userinfo["密码"] === info["密码"]){
                     Toast("登录成功");
                     localStorage.setItem("isLogin","1");
                     router.push("./home");

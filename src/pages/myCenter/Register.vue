@@ -39,6 +39,7 @@ import Header from '../../components/Header.vue';
 import { useStore }  from 'vuex';
 import { useRouter} from 'vue-router';
 import Footer from '@/components/Footer.vue';
+import { Toast } from 'vant';
 
 export default { 
 components: { Header, Footer },
@@ -51,9 +52,28 @@ setup(){
         password:"",
     });
 
-    //注册行为
-    const submit = () => {
+    //common method
+    const register = (value) => {
+        localStorage.setItem("userInfo",JSON.stringify(value));
+        Toast("注册成功，请登录");
+        router.push('./login');
+    }
 
+    //注册行为
+    const onSubmit = (value) => {
+        //判断是否有相同用户名存在
+        if(localStorage.userInfo){
+            let userInfo = JSON.parse(localStorage.userInfo);
+            if(userInfo["用户名"] == value["用户名"]){
+                Toast("用户名已被占用");
+                return;
+            }else{
+                register(value);
+            }
+        }else{
+            register(value);
+        }
+        
     };
 
     const toLogin = () => {
@@ -63,7 +83,7 @@ setup(){
     return {
         ...toRefs(data),
         store,
-        submit,
+        onSubmit,
         toLogin,
     }
 }
