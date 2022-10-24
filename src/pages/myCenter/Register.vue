@@ -1,5 +1,6 @@
 <template>
-    账号管理页面
+
+   注册页面
 </template>
 <script>
 import { onMounted, reactive, toRefs }  from 'vue';

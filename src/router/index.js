@@ -20,10 +20,6 @@ const router = createRouter({
             component: () => import('../pages/myOrder/MyOrder'),
         },
         {
-            path: '/center',
-            component: () => import('../pages/myCenter/MyCenter'),
-        },
-        {
             path: '/shop',
             component: () => import('../pages/myShop/MyShop'),
         },
@@ -38,6 +34,18 @@ const router = createRouter({
         {
             path: '/addressedit',
             component: () => import('../pages/address/AddressEdit')
+        },
+        {
+            path: '/center',
+            component: () => import('../pages/myCenter/MyCenter'),
+        },
+        {
+            path: '/login',
+            component: () => import('../pages/myCenter/Login')
+        },
+        {
+            path: '/register',
+            component: () => import('../pages/myCenter/Register')
         },
         {
             path: '/userinfoedit',
