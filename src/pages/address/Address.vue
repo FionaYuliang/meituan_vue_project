@@ -58,7 +58,6 @@
            };
 
            const onEdit = (item) => {
-            console.log(item);
             router.push({
               path:'/addressedit',
               query: {

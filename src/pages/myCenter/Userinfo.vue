@@ -1,6 +1,6 @@
 <template>
     <div class="user-edit">
-        <header title="账号管理"></header>
+        <Header title="账号管理"></Header>
         <div class="input-item">
             <van-field v-model="username" label="昵称" placeholder="请输入用户名"/>
             <van-field v-model="intro" label="个性签名" placeholder="请输入个性签名"/>
