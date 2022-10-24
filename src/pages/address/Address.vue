@@ -1,33 +1,22 @@
 <template>
-    <div class="order">
-       <Header title="地址管理"></Header>
-       <div class="content">
-        <van-address-list
-            v-model="chosenAddressId"
-            :list="addresslist"
-            :disabled-list="disabledList"
-            default-tag-text="默认"
-            @add="onAdd"
-            @edit="onEdit"
-        />
-       </div>
-    </div>
+<Header title="地址管理"></Header>
+<van-address-list
+    v-model="chosenAddressId"
+    :list="addresslist"
+    :disabled-list="disabledList"
+    default-tag-text="默认"
+    @add="onAdd"
+    @edit="onEdit"
+/>
    </template>
    <script>
    import { onMounted, reactive, toRefs } from 'vue';
-   import Footer from '../../components/Footer.vue';
    import Header from '../../components/Header.vue';
-   import Blank from '../../components/Blank.vue';
    import { useStore }  from 'vuex';
-    import { useRouter } from 'vue-router';
-import { timeEnd } from 'console';
+   import { useRouter } from 'vue-router';
     
    export default { 
-       components: {
-       Footer,
-       Header,
-       Blank
-   },
+       components: {Header },
        setup(){
            const store = useStore();
            const router = useRouter();

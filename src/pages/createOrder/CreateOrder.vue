@@ -53,8 +53,9 @@ export default {
                 }
             });
         };
-        //编辑联系人
+        //编辑收件地址
         const onEdit = () =>{
+            router.push("./address");
 
         };
         //计算商品总金额

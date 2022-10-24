@@ -9,7 +9,7 @@ export default createStore({
         userAddress: [
             {
                 id:1001,
-                name: 'yangmingming',
+                name: '杨明明',
                 tel: '15340126264',
                 province: '北京市',
                 city: '北京市',
@@ -20,7 +20,7 @@ export default createStore({
             },
             {
                 id:1002,
-                name: 'yaozeyuan',
+                name: '学舟寺',
                 tel: '18354236262',
                 province: '山东省',
                 city: '济宁市',
@@ -52,7 +52,19 @@ export default createStore({
         //更新已下单列表
         UPDATEORDER(state, value){
             state.orderedList = state.orderedList.concat(state.orderList);
-        }
+        },
+        //新增地址
+        ADDNEWADDR(state,value){
+
+        },
+        //编辑地址
+        CHANGEADDR(state,value){
+            
+        },
+        //删除地址
+        DELETEADDR(state,value){
+            
+        },
 
     },
     //异步执行的方法

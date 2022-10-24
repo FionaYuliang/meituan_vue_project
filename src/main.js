@@ -4,7 +4,7 @@ import 'amfe-flexible';
 import {Button, Icon, Tab, Tabs, TreeSelect, 
     Stepper, ActionBar, ActionBarIcon, ActionBarButton,
     Checkbox, CheckboxGroup, SubmitBar, ContactCard, Card, Dialog, 
-    AddressList,  AddressEdit} from 'vant'
+    AddressList,  AddressEdit, Area} from 'vant'
 import 'vant/lib/index.css';
 import router from '../src/router/index';
 import '../src/common/css/base.less';
@@ -28,6 +28,7 @@ use(ContactCard).
 use(Card).
 use(Dialog).
 use(AddressEdit).
+use(Area).
 use(AddressList);
 
 app.use(router);
