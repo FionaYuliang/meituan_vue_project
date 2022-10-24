@@ -39,6 +39,7 @@ import Header from '../../components/Header.vue';
 import { useStore }  from 'vuex';
 import { useRouter} from 'vue-router';
 import Footer from '@/components/Footer.vue';
+import { Toast } from 'vant';
 
 export default { 
 components: { Header, Footer },
@@ -51,8 +52,23 @@ setup(){
         password:"",
     });
 
-    const submit = () => {
-
+    const onSubmit = (info) => {
+        if(!localStorage.userinfo){
+            Toast("账号不存在");
+        }else{
+            let userinfo = JSON.parse(localStorage.userinfo);
+            if(userinfo[""] === info[""]){
+                if(userinfo[""] === info[""]){
+                    Toast("登录成功");
+                    localStorage.setItem("isLogin","1");
+                    router.push("./home");
+                }else{
+                    Toast("账号不存在");
+                }
+            }else{
+                Toast("账号不存在或者输入错误");
+            }
+        }
     };
 
     const toRegister = () => {
@@ -62,7 +78,7 @@ setup(){
     return {
         ...toRefs(data),
         store,
-        submit,
+        onSubmit,
         toRegister,
     }
 }
