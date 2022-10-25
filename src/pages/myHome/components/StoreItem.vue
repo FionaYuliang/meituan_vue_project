@@ -6,7 +6,7 @@
             <div class="sales">{{ item.sales }}</div>
             <div class="price">起送费 ￥{{ item.sales }} 免配送费</div>
             <div class="label">
-            <div v-for="(i, index) in item.label"> {{i}}</div>
+            <div v-for="(i, index) in item.label" :key="index"> {{i}}</div>
             </div>
 
         </div>
@@ -15,14 +15,18 @@
 </template>
 
 <script>
-import router from "@/router";
 import { useRouter} from "vue-router";
 export default {
-    props:["item"],
+    props:["item"], 
     setup(){
       const router = useRouter();
-      const toShop = () => {
-        router.push('./shop');
+      const toShop = (item) => {
+        router.push({
+          path: './shop',
+          query: {
+            title: item.title,
+          }
+        })
       };
       return {
         toShop,
