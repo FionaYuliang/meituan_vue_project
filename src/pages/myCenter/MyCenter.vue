@@ -35,7 +35,7 @@
  
 </template>
 <script>
-import { onMounted, reactive, toRefs }  from 'vue';
+import { reactive, toRefs }  from 'vue';
 import Header from '../../components/Header.vue';
 import { useStore }  from 'vuex';
 import { useRouter} from 'vue-router';
@@ -49,7 +49,7 @@ setup(){
     
     let userinfo = reactive({
         name:"杨明明",
-        intro:"吃饭不积极思想有问题",
+        intro:"吃饭不积极，思想有问题",
 
     });
     const togo = (path) =>{
@@ -88,6 +88,8 @@ setup(){
         padding: 25px 20px;
         box-sizing: border-box;
         img {
+          width:60px;
+          height:60px;
           border-radius: 50%;
           margin-top: 4px;
         }
