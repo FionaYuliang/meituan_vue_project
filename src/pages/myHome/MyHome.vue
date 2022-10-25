@@ -18,18 +18,14 @@
                     <div class="classify">
                         <div class="big_classify">
                             <div v-for="(i, index) in big_classify" :key="index">
-                                <svg class="icon" aria-hidden="true">
-                  <use :xlink:href="`#${i.icon}`"></use>
-                </svg>
-                {{ i.name }}
+                            <img class="icon" :src="i.icon"/>
+                            <span>{{ i.name }}</span>
                             </div>
                         </div>
                         <div class="small_classify">
                             <div v-for="(i, index) in small_classify" :key="index" >
-                                <svg class="icon" aria-hidden="true">
-                  <use :xlink:href="`#${i.icon}`"></use>
-                </svg>
-                {{ i.name }}
+                              <img class="icon" :src="i.icon"/>
+                            <span>{{ i.name }}</span>
                             </div>
                    
                         </div>
@@ -58,23 +54,23 @@ export default {
     setup(){
         let data = reactive({
         big_classify: [
-        { name: "美食", icon: "icon-meishi" },
-        { name: "甜点饮品", icon: "icon-tiandian" },
-        { name: "超市便利", icon: "icon-chaoshi" },
-        { name: "生鲜果蔬", icon: "icon-ningmengshuiguotiandian" },
-        { name: "美团买药", icon: "icon-yaopin" },
+        { name: "美食", icon: require("../../assets/wucan.png")},
+        { name: "甜点饮品", icon: require("../../assets/tiandian.png") },
+        { name: "超市便利", icon: require("../../assets/chaoshi2.png")},
+        { name: "生鲜果蔬", icon: require("../../assets/guoshu.png") },
+        { name: "美团买药", icon: require("../../assets/yaopin.png") },
       ],
       small_classify: [
-        { name: "午餐", icon: "icon-canyinmeishi" },
-        { name: "买酒", icon: "icon-jiu" },
-        { name: "新鲜水果", icon: "icon-iconfonttubiaozhizuo-" },
-        { name: "汉堡披萨", icon: "icon-hanbaobao" },
-        { name: "休闲饮品", icon: "icon-cha1" },
-        { name: "夜宵", icon: "icon-iconfonttubiaozhizuo-3" },
-        { name: "吐司", icon: "icon-iconfonttubiaozhizuo-5" },
-        { name: "跑腿", icon: "icon-paotuiAPP" },
-        { name: "美人佳丽", icon: "icon-kouhong1" },
-        { name: "全部分类", icon: "icon-quanbufenlei" },
+        { name: "午餐", icon: require("../../assets/meishi.png") },
+        { name: "买酒", icon: require("../../assets/maijiu.png") },
+        { name: "新鲜水果", icon: require("../../assets/shuiguo.png") },
+        { name: "汉堡披萨", icon: require("../../assets/hanbao.png") },
+        { name: "休闲饮品", icon: require("../../assets/yinpin.png") },
+        { name: "夜宵", icon: require("../../assets/yexiao.png") },
+        { name: "吐司", icon: require("../../assets/tusi.png") },
+        { name: "跑腿", icon: require("../../assets/paotui.png") },
+        { name: "美人佳丽", icon: require("../../assets/kouhong.png") },
+        { name: "全部分类", icon: require("../../assets/quanbu.png")},
       ],
       content_nav_list: [
         {
